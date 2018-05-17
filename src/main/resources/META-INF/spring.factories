@@ -1,0 +1,4 @@
+#app listener
+org.springframework.context.ApplicationListener=com.example.demo.listener.ExtraAppListener
+#analizers
+org.springframework.boot.diagnostics.FailureAnalyzer=com.example.demo.analizer.ModelMapFailureAnalizer
