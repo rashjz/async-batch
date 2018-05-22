@@ -2,19 +2,19 @@ package com.example.demo.configuration;
 
 import com.example.demo.domain.User;
 import com.example.demo.domain.UserApplication;
- import com.example.demo.processor.AsyncItemProcessor;
 import com.example.demo.reader.UserItemReader;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.writer.AsyncItemWriter;
 import com.example.demo.writer.JsonLineAggregator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.batch.integration.async.AsyncItemProcessor;
+import org.springframework.batch.integration.async.AsyncItemWriter;
+import org.springframework.batch.item.ItemWriter;
 
 import java.util.concurrent.Future;
 
