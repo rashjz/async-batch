@@ -2,7 +2,6 @@ package com.example.demo.processor;
 
 import com.example.demo.domain.User;
 import com.example.demo.domain.UserApplication;
-import com.example.demo.event.UserEvent;
 import com.example.demo.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -23,7 +22,8 @@ public class UserItemProcessor implements ItemProcessor<User, UserApplication> {
 
     @Override
     public UserApplication process(User user) throws Exception {
+        userRepository.getAllUsersByRmCode(user.getUsername());
         publisher.publishEvent(user);
-        return UserApplication.builder().build();
+        return UserApplication.builder().user(user).build();
     }
 }
