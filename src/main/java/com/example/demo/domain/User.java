@@ -16,4 +16,5 @@ public class User implements Serializable {
     private String username;
     private boolean admin;
     private String status;
+    private String rmCode;
 }

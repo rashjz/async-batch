@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 @Component
 public class UserDataCollector {
-    private static final String WORK_DIR = "C:\\";
+    private static final String WORK_DIR = UserDataCollector.class.getResource("").getPath();
     private final SynchronousQueue<User> queue = new SynchronousQueue<>(true);
     private final ExecutorService executor = Executors.newSingleThreadExecutor(runnable -> {
         Thread thread = new Thread(runnable);

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(JUnit4.class)
 public class UserItemReaderTest {
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void doRead_nullProvider_iteratorInitialized() throws Exception {
         // Setup
         UserItemReader<Object> reader = new UserItemReader<>(() -> null);
