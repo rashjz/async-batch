@@ -21,7 +21,6 @@ public class UserEventListener {
 
     @EventListener
     public void handleUserEvent(UserEvent event) {
-        //do some operations
         userDataCollector.save(event.getUser());
         log.info("data received from listener " + event.getUser().getUsername());
     }
