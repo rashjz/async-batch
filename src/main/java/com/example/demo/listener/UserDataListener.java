@@ -23,7 +23,7 @@ public class UserDataListener implements JobExecutionListener {
     @Override
     public void beforeJob(JobExecution jobExecution) {
         JobParameters jobParameters = jobExecution.getJobParameters();
-//        publisher.publishEvent(.builder()
+//       do some operation
 
     }
 
