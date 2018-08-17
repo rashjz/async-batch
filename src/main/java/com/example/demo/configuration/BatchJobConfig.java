@@ -3,7 +3,6 @@ package com.example.demo.configuration;
 
 import com.example.demo.domain.User;
 import com.example.demo.domain.UserApplication;
-import com.example.demo.event.UserEvent;
 import com.example.demo.listener.UserDataListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;

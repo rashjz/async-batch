@@ -1,5 +1,6 @@
 //package com.example.demo.collector;
 //
+//import com.example.demo.configuration.properties.ApplicationProperties;
 //import com.example.demo.domain.User;
 //import org.junit.After;
 //import org.junit.Before;
@@ -33,13 +34,16 @@
 //    @Before
 //    public void setUp() throws IOException {
 //        latch = new CountDownLatch(1);
-//        protocolDataCollector = new UserDataCollectorWrapper();
+//        ApplicationProperties applicationProperties = new ApplicationProperties();
+//        applicationProperties.setWorkDir("../log/");
+//        protocolDataCollector = new UserDataCollectorWrapper(applicationProperties);
 //        protocolDataCollector.init();
 //        data = User.builder()
 //                .status("a")
 //                .admin(true)
 //                .build();
 //    }
+//
 //    @After
 //    public void clean() {
 //        protocolDataCollector.destroy();
@@ -50,10 +54,14 @@
 //        protocolDataCollector.write(data);
 //        latch.await(1, TimeUnit.SECONDS);
 ////        String fullFileName = properties.getWorkDir() + String.format(properties.getProtocolFileNameTemplate(), properties.getJobId());
-//        assertTrue( " Not found", Paths.get("E:/Files").toFile().exists());
+//        assertTrue(" Not found", Paths.get("E:/Files").toFile().exists());
 //    }
 //
 //    private class UserDataCollectorWrapper extends UserDataCollector {
+//        public UserDataCollectorWrapper(ApplicationProperties applicationProperties) {
+//            super(applicationProperties);
+//        }
+//
 //        @Override
 //        protected void write(User data) {
 //            super.write(data);

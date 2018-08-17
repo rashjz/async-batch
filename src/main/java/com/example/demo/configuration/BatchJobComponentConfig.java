@@ -15,6 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.batch.integration.async.AsyncItemProcessor;
 import org.springframework.batch.integration.async.AsyncItemWriter;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.core.io.FileSystemResource;
 
 import java.util.concurrent.Future;
 
@@ -40,7 +41,7 @@ public class BatchJobComponentConfig {
     public ItemWriter<UserApplication> userItemWriter(final ObjectMapper objectMapper) {
         FlatFileItemWriter<UserApplication> flatFileWriter = new FlatFileItemWriter<>();
         flatFileWriter.setLineAggregator(new JsonLineAggregator<>(objectMapper));
-        flatFileWriter.setResource(new ClassPathResource("sample-data.csv"));
+        flatFileWriter.setResource(new FileSystemResource("file://../sample-data.csv"));
         return flatFileWriter;
     }
 

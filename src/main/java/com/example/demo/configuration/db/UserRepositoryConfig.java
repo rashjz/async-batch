@@ -18,7 +18,7 @@ public class UserRepositoryConfig {
     private final DataSource dataSource;
 
     @Autowired
-    public UserRepositoryConfig(@Qualifier("h2DataSource") final DataSource dataSource) {
+    public UserRepositoryConfig(@Qualifier("mainDataSource") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
