@@ -4,9 +4,9 @@ import lombok.Data;
  
 @Data
 public class ApplicationProperties {
-    private String url;
-    private String username;
-    private String password;
-    private String driverClassName;
+    private String jobId;
+    private String workDir;
+    private String csvDelimiter;
+
 
 }
