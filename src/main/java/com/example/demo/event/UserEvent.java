@@ -2,28 +2,26 @@ package com.example.demo.event;
 
 
 import com.example.demo.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
 
+import java.io.Serializable;
+
 @Slf4j
-public class UserEvent extends ApplicationEvent {
+@Data
+@Builder
+public class UserEvent implements Serializable {
+    private static final long serialVersionUID = 12L;
 
     private final User user;
     private final boolean admin;
 
-
-    public UserEvent(Object source, User user) {
-        super(source);
-        this.user = user;
-        this.admin = user.isAdmin();
+    public UserEvent(  User user, boolean admin) {
+         this.user = user;
+        this.admin = admin;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
 }
