@@ -1,5 +1,6 @@
 package com.example.demo.collector;
 
+import com.example.demo.configuration.properties.ApplicationProperties;
 import com.example.demo.domain.User;
 import com.example.demo.utils.UserDataUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 @Component
 public class UserDataCollector {
-    private static final String WORK_DIR = UserDataCollector.class.getResource("").getPath();
+    private final ApplicationProperties applicationProperties;
+
     private final SynchronousQueue<User> queue = new SynchronousQueue<>(true);
     private final ExecutorService executor = Executors.newSingleThreadExecutor(runnable -> {
         Thread thread = new Thread(runnable);
@@ -38,8 +40,13 @@ public class UserDataCollector {
 
     private AtomicBoolean closed = new AtomicBoolean(false);
 
+    public UserDataCollector(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+    }
+
     public void save(User user) {
         log.debug("Try save {}", user);
+        log.info("properties "+ applicationProperties.toString());
         try {
             queue.put(user);
         } catch (InterruptedException e) {
@@ -50,7 +57,7 @@ public class UserDataCollector {
 
     @PostConstruct
     public void init() throws IOException {
-        printer = createCSVPrinter(WORK_DIR);
+        printer = createCSVPrinter(applicationProperties.getWorkDir());
 
         executor.execute(() -> {
             while (!Thread.interrupted()) {
@@ -66,7 +73,7 @@ public class UserDataCollector {
         });
     }
 
-    protected void write(User data) {
+    void write(User data) {
         Assert.notNull(data, "ProtocolData for write is null");
         try {
             printer.printRecord(UserDataUtils.prepareRecord(data));
@@ -93,6 +100,7 @@ public class UserDataCollector {
             closed.set(true);
         }
     }
+
     private CSVPrinter createCSVPrinter(String reportFileName) throws IOException {
 
         Path filePatch = Paths.get(reportFileName);
